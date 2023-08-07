@@ -27,7 +27,7 @@ I think I can make something like that:
 ## Plan
 
 1. ~~find a beat'em up art set on itch.io~~ use oryx 🙂
-2. create world scene
+2. ~~create world scene~~
 3. create a hero scene with an attack animation
 4. create an enemy scene with a take damage animation
 5. create interation and main mechanic of hero attacking enemy

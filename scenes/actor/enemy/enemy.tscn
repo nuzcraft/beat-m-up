@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dey3vrrqpebvc"]
+
+[ext_resource type="PackedScene" uid="uid://dui2sgrco7hlr" path="res://scenes/actor/actor.tscn" id="1_5bhs6"]
+[ext_resource type="Script" path="res://scenes/actor/enemy/enemy.gd" id="2_7prqn"]
+[ext_resource type="Texture2D" uid="uid://gg61tcxp0wm4" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="3_t12aj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgqmc"]
+atlas = ExtResource("3_t12aj")
+region = Rect2(48, 312, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fboa"]
+atlas = ExtResource("3_t12aj")
+region = Rect2(48, 336, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ouagp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgqmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fboa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_5bhs6")]
+script = ExtResource("2_7prqn")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ouagp")
+frame_progress = 0.565725
