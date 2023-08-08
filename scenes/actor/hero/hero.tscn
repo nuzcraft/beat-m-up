@@ -1,25 +1,42 @@
-[gd_scene load_steps=7 format=3 uid="uid://c542urqo3hlwn"]
+[gd_scene load_steps=10 format=3 uid="uid://c542urqo3hlwn"]
 
 [ext_resource type="PackedScene" uid="uid://dui2sgrco7hlr" path="res://scenes/actor/actor.tscn" id="1_q5rcu"]
 [ext_resource type="Script" path="res://scenes/actor/hero/hero.gd" id="2_ppjak"]
+[ext_resource type="Shader" path="res://scenes/actor/actor.gdshader" id="3_om20x"]
 [ext_resource type="Texture2D" uid="uid://gg61tcxp0wm4" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="3_tpw0o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_odjr8"]
-atlas = ExtResource("3_tpw0o")
-region = Rect2(336, 216, 24, 24)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnwcl"]
+shader = ExtResource("3_om20x")
+shader_parameter/whitening = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qpau8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4vrh"]
 atlas = ExtResource("3_tpw0o")
 region = Rect2(336, 240, 24, 24)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rqs1i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0way"]
+atlas = ExtResource("3_tpw0o")
+region = Rect2(336, 216, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbgfx"]
+atlas = ExtResource("3_tpw0o")
+region = Rect2(336, 240, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dhngl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_odjr8")
+"texture": SubResource("AtlasTexture_l4vrh")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0way")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qpau8")
+"texture": SubResource("AtlasTexture_kbgfx")
 }],
 "loop": true,
 "name": &"idle",
@@ -29,6 +46,6 @@ animations = [{
 [node name="Hero" instance=ExtResource("1_q5rcu")]
 script = ExtResource("2_ppjak")
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_rqs1i")
-frame_progress = 0.434861
+[node name="CharacterSprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_wnwcl")
+sprite_frames = SubResource("SpriteFrames_dhngl")
