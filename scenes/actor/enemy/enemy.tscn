@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://gg61tcxp0wm4" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="3_t12aj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l6ynm"]
+resource_local_to_scene = true
 shader = ExtResource("3_h44g0")
 shader_parameter/whitening = 0.0
 
