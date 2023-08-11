@@ -9,11 +9,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("ui_left"):
+	if InputBuffer.is_action_press_buffered("ui_left"):
 		hero.flip_h(false)
 		var enemy = get_closest_enemy("left")
 		move_hero_to_attack(enemy)
-	elif Input.is_action_just_pressed("ui_right"):
+	elif InputBuffer.is_action_press_buffered("ui_right"):
 		hero.flip_h(true)
 		var enemy = get_closest_enemy("right")
 		move_hero_to_attack(enemy)
