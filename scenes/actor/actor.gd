@@ -4,7 +4,9 @@ class_name Actor
 @onready var characterSprite: AnimatedSprite2D = $CharacterSprite
 @onready var attackSprite: AnimatedSprite2D = $AttackSprite
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
-# Called when the node enters the scene tree for the first time.
+
+var dead: bool = false
+
 func _ready():
 	pass
 
@@ -25,6 +27,7 @@ func attack():
 	attackSprite.play("attack")	
 	
 func take_damage():
+	dead = true
 	animationPlayer.play("take_damage")
 
 func _on_attack_sprite_animation_finished():

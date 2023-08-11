@@ -25,6 +25,8 @@ func get_closest_enemy(direction: String):
 	var closest = null
 	for enemy in enemies:
 		var x_distance = enemy.global_position.x - hero.global_position.x
+		if enemy.dead:
+			continue
 		if direction == "right" and x_distance < 0:
 			continue
 		if direction == "left" and x_distance > 0:
