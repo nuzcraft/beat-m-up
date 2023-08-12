@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var hero: Hero = $Hero
 
+var effect_scene = preload("res://scenes/effect/effect.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -25,8 +27,6 @@ func get_closest_enemy(direction: String):
 	var closest = null
 	for enemy in enemies:
 		var x_distance = enemy.global_position.x - hero.global_position.x
-		if enemy.dead:
-			continue
 		if direction == "right" and x_distance < 0:
 			continue
 		if direction == "left" and x_distance > 0:
@@ -40,15 +40,24 @@ func get_closest_enemy(direction: String):
 	
 func move_hero_to_attack(target):
 	if target:
-		var distance: Vector2 = target.global_position - hero.global_position
-		var normalized: Vector2 = Vector2(distance.x, 0).normalized()
+		var difference: Vector2 = target.global_position - hero.global_position
+		var normalized: Vector2 = Vector2(difference.x, 0).normalized()
 		var new_position: Vector2 = Vector2(target.global_position.x + (24 * -normalized.x), target.global_position.y)
-#		hero.global_position = target.global_position
-#		hero.global_position.x += (24 * -normalized.x)
-		var move_hero_tween = get_tree().create_tween()
-		move_hero_tween.set_ease(Tween.EASE_IN_OUT)
-		move_hero_tween.tween_property(hero, "global_position", new_position, 0.1)
-		move_hero_tween.tween_callback(hero.attack)
-		move_hero_tween.tween_callback(target.take_damage)
+		if hero.global_position.distance_to(target.global_position) > 24:
+			var move_hero_tween = get_tree().create_tween()
+			move_hero_tween.set_ease(Tween.EASE_IN_OUT)
+			move_hero_tween.tween_property(hero, "global_position", new_position, 0.1)
+			move_hero_tween.tween_callback(attack.bind(hero, target))
+		else:
+			attack(hero, target)
+		
+		
+func attack(actor, target):
+	actor.attack()
+	target.take_damage()
+	var effect = effect_scene.instantiate()
+	add_child(effect)
+	effect.global_position = Vector2(target.global_position.x- 8, target.global_position.y - 16)
+	effect.play("attack_1")
 #
 		

@@ -112,6 +112,7 @@ _data = {
 
 [node name="Actor" type="Node2D"]
 script = ExtResource("1_m1r0q")
+health = 3
 
 [node name="CharacterSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_wweye")
@@ -121,6 +122,7 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="AttackSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(-15, -12)
 sprite_frames = SubResource("SpriteFrames_mu7s2")
 animation = &"attack"

@@ -5,14 +5,15 @@ class_name Actor
 @onready var attackSprite: AnimatedSprite2D = $AttackSprite
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
+@export var health: int
 var dead: bool = false
 
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if dead:
+		die()
 	
 func flip_h(b: bool):
 	characterSprite.flip_h = b
@@ -23,11 +24,14 @@ func flip_h(b: bool):
 		attackSprite.position.x *= -1
 		
 func attack():
-	characterSprite.play("attack")
-	attackSprite.play("attack")	
+#	characterSprite.play("attack")
+#	attackSprite.play("attack")	
+	pass
 	
 func take_damage():
-	dead = true
+	health -= 1
+	if health <= 0:
+		dead = true
 	animationPlayer.play("take_damage")
 
 func _on_attack_sprite_animation_finished():
@@ -35,8 +39,9 @@ func _on_attack_sprite_animation_finished():
 		characterSprite.play("idle")
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "take_damage":
-		die()
+#	if anim_name == "take_damage":
+#		die()
+	pass
 		
 func die():
 	var die_tween = get_tree().create_tween()
