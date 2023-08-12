@@ -28,8 +28,13 @@ I think I can make something like that:
 
 1. ~~find a beat'em up art set on itch.io~~ use oryx 🙂
 2. ~~create world scene~~
-3. create a hero scene with an attack animation
-4. create an enemy scene with a take damage animation
-5. create interation and main mechanic of hero attacking enemy
-6. add health to hero and enemy
+3. ~~create a hero scene with an attack animation~~
+4. ~~create an enemy scene with a take damage animation~~
+5. ~~create interation and main mechanic of hero attacking enemy~~
+6. ~~add health to hero and enemy~~
 7. add attack to enemy and let them hurt hero
+8. ~~refactor actor code so that stuff like death is separate from other animations~~
+9. move attack animations off the attacking actor
+10. rudimentary background
+11. screenshake
+12. combo system for hero
