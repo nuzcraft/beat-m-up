@@ -11,9 +11,11 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func _on_effect_sprite_animation_finished():
 	queue_free()
 	
 func play(anim: String):
 	effect_sprite.play(anim)
+	
+func flip_h(b: bool):
+	effect_sprite.flip_h = b

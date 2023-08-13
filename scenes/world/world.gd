@@ -12,11 +12,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if InputBuffer.is_action_press_buffered("ui_left"):
-		hero.flip_h(false)
+		hero.set_flip_h(false)
 		var enemy = get_closest_enemy("left")
 		move_hero_to_attack(enemy)
 	elif InputBuffer.is_action_press_buffered("ui_right"):
-		hero.flip_h(true)
+		hero.set_flip_h(true)
 		var enemy = get_closest_enemy("right")
 		move_hero_to_attack(enemy)
 
@@ -47,17 +47,19 @@ func move_hero_to_attack(target):
 			var move_hero_tween = get_tree().create_tween()
 			move_hero_tween.set_ease(Tween.EASE_IN_OUT)
 			move_hero_tween.tween_property(hero, "global_position", new_position, 0.1)
+			hero.jump()
 			move_hero_tween.tween_callback(attack.bind(hero, target))
 		else:
 			attack(hero, target)
 		
 		
 func attack(actor, target):
-	actor.attack()
-	target.take_damage()
+	var attack_info = actor.get_attack(target)
+	target.take_damage(attack_info["damage"])
 	var effect = effect_scene.instantiate()
 	add_child(effect)
-	effect.global_position = Vector2(target.global_position.x- 8, target.global_position.y - 16)
-	effect.play("attack_1")
+	effect.global_position = Vector2(target.global_position.x, target.global_position.y-12)
+	effect.flip_h(actor.get_flip_h())
+	effect.play(attack_info["anim"])
 #
 		

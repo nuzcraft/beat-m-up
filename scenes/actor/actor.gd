@@ -2,11 +2,26 @@ extends Node2D
 class_name Actor
 
 @onready var characterSprite: AnimatedSprite2D = $CharacterSprite
-@onready var attackSprite: AnimatedSprite2D = $AttackSprite
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+@onready var comboTimer: Timer = $ComboTimer
 
 @export var health: int
 var dead: bool = false
+
+enum combo_anim {
+	ATTACK_1,
+	ATTACK_2,
+	ATTACK_3
+}
+var combo_damage = {
+	combo_anim.ATTACK_1: 0,
+	combo_anim.ATTACK_2: 1,
+	combo_anim.ATTACK_3: 2
+}
+@export var base_damage: int = 1
+var current_combo = combo_anim.ATTACK_1
+var current_target
+var combo_time: float = 0.5
 
 func _ready():
 	pass
@@ -15,35 +30,69 @@ func _process(delta):
 	if dead:
 		die()
 	
-func flip_h(b: bool):
+func set_flip_h(b: bool):
 	characterSprite.flip_h = b
-	attackSprite.flip_h = b
 	
-	attackSprite.position.x = abs(attackSprite.position.x)
-	if not b:
-		attackSprite.position.x *= -1
+func get_flip_h():
+	return characterSprite.flip_h
 		
-func attack():
-#	characterSprite.play("attack")
-#	attackSprite.play("attack")	
-	pass
+func jump():
+	animationPlayer.play("jump")
 	
-func take_damage():
-	health -= 1
+func take_damage(amount: int):
+	health -= amount
 	if health <= 0:
 		dead = true
 	animationPlayer.play("take_damage")
 
-func _on_attack_sprite_animation_finished():
-	if characterSprite.animation == "attack":
-		characterSprite.play("idle")
-
 func _on_animation_player_animation_finished(anim_name):
-#	if anim_name == "take_damage":
-#		die()
-	pass
+	if anim_name == "jump":
+		animationPlayer.play("RESET")
 		
 func die():
 	var die_tween = get_tree().create_tween()
 	die_tween.tween_property(characterSprite, "modulate:a", 0, 0.25)
 	die_tween.tween_callback(queue_free)
+	
+func get_attack(target):
+	check_target(target)
+	if comboTimer.time_left > 0.0:
+		increase_combo()
+	else:
+		comboTimer.wait_time = combo_time
+		comboTimer.start()
+	var anim_name = combo_anim.keys()[current_combo].to_lower()
+	var damage = base_damage + combo_damage[current_combo]
+	attack_anim(target)
+	return {"anim": anim_name, "damage": damage}
+	
+func attack_anim(target):
+	characterSprite.global_position = Vector2(target.global_position.x, target.global_position.y - 12)
+	characterSprite.position.x -= (characterSprite.position.x / 2)
+	var tween = get_tree().create_tween()
+	tween.tween_property(characterSprite, "position", Vector2(0, -12), 0.1)
+	
+
+func increase_combo():
+	current_combo += 1
+	if current_combo > combo_anim.size() - 1:
+		current_combo = combo_anim.size() - 1
+	comboTimer.stop()
+	comboTimer.wait_time = combo_time
+	comboTimer.start()
+	
+func reset_combo():
+	current_combo = combo_anim.ATTACK_1
+	comboTimer.stop()
+	comboTimer.wait_time = combo_time
+
+func _on_combo_timer_timeout():
+	current_combo = combo_anim.ATTACK_1
+	
+func set_current_target(target):
+	current_target = target
+	
+func check_target(target):
+	if target != current_target:
+		reset_combo()
+		current_target = target

@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxt4v0lpfkke4"]
+
+[ext_resource type="PackedScene" uid="uid://dey3vrrqpebvc" path="res://scenes/actor/enemy/enemy.tscn" id="1_o2jti"]
+[ext_resource type="Shader" path="res://scenes/actor/actor.gdshader" id="2_0bk2h"]
+[ext_resource type="Script" path="res://scenes/actor/enemy/jerry/jerry.gd" id="2_wkapg"]
+[ext_resource type="Texture2D" uid="uid://gg61tcxp0wm4" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="4_6n8h3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgesk"]
+resource_local_to_scene = true
+shader = ExtResource("2_0bk2h")
+shader_parameter/whitening = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjalo"]
+atlas = ExtResource("4_6n8h3")
+region = Rect2(24, 336, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htmi7"]
+atlas = ExtResource("4_6n8h3")
+region = Rect2(24, 312, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ernpr"]
+atlas = ExtResource("4_6n8h3")
+region = Rect2(24, 336, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cyuwv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjalo")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htmi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ernpr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sq274"]
+font_size = 10
+
+[node name="Jerry" instance=ExtResource("1_o2jti")]
+script = ExtResource("2_wkapg")
+health = 2
+
+[node name="CharacterSprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_jgesk")
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_cyuwv")
+animation = &"attack"
+
+[node name="NameLabel" type="Label" parent="CharacterSprite" index="0"]
+offset_left = -11.0
+offset_top = -19.0
+offset_right = 12.0
+offset_bottom = -2.0
+text = "Jerry"
+label_settings = SubResource("LabelSettings_sq274")

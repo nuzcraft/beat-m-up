@@ -46,8 +46,9 @@ animations = [{
 
 [node name="Enemy" groups=["enemies"] instance=ExtResource("1_5bhs6")]
 script = ExtResource("2_7prqn")
+health = 4
 
-[node name="CharacterSprite" parent="." index="0"]
+[node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_l6ynm")
 sprite_frames = SubResource("SpriteFrames_27rg1")
 animation = &"idle"

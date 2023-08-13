@@ -32,9 +32,14 @@ I think I can make something like that:
 4. ~~create an enemy scene with a take damage animation~~
 5. ~~create interation and main mechanic of hero attacking enemy~~
 6. ~~add health to hero and enemy~~
-7. add attack to enemy and let them hurt hero
-8. ~~refactor actor code so that stuff like death is separate from other animations~~
-9. move attack animations off the attacking actor
-10. rudimentary background
-11. screenshake
-12. combo system for hero
+7. ~~shadows underneath actors~~
+8. add attack to enemy and let them hurt hero
+9. enemy ai
+10. enemy spawner system
+11. ~~refactor actor code so that stuff like death is separate from other animations~~
+12. ~~move attack animations off the attacking actor~~
+13. rudimentary background
+14. screenshake
+15. ~~combo system for hero~~
+16. rudimentary score system
+17. ~~add jerry slime~~
