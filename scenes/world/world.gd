@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var hero: Hero = $Hero
+@onready var shakeCamera: Camera2D = $ShakeCamera
 
 var effect_scene = preload("res://scenes/effect/effect.tscn")
 
@@ -61,5 +62,6 @@ func attack(actor, target):
 	effect.global_position = Vector2(target.global_position.x, target.global_position.y-12)
 	effect.flip_h(actor.get_flip_h())
 	effect.play(attack_info["anim"])
+	shakeCamera.add_shake(attack_info["shake_amount"])
 #
 		
