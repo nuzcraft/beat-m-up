@@ -19,7 +19,7 @@ func _ready():
 	randomize()
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.set_seed(randi())
-	noise.frequency = 2
+	noise.frequency = 4
 	noise_x = randf()
 
 func add_shake(amount):

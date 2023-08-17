@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgjdmis0x5c2"]
+[gd_scene load_steps=7 format=3 uid="uid://cgjdmis0x5c2"]
 
 [ext_resource type="PackedScene" uid="uid://c542urqo3hlwn" path="res://scenes/actor/hero/hero.tscn" id="1_4tnvd"]
 [ext_resource type="Script" path="res://scenes/world/world.gd" id="1_bmblk"]
 [ext_resource type="PackedScene" uid="uid://b2qv7j6fcq01e" path="res://scenes/shake_camera/shake_camera.tscn" id="2_h8emb"]
 [ext_resource type="PackedScene" uid="uid://dey3vrrqpebvc" path="res://scenes/actor/enemy/enemy.tscn" id="2_x7qlw"]
 [ext_resource type="PackedScene" uid="uid://dxt4v0lpfkke4" path="res://scenes/actor/enemy/jerry/jerry.tscn" id="4_rtd4x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g77hg"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_bmblk")
@@ -29,3 +36,25 @@ position = Vector2(367, 206)
 
 [node name="Jerry" parent="." instance=ExtResource("4_rtd4x")]
 position = Vector2(156, 87)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 96.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Score: 200
+"
+label_settings = SubResource("LabelSettings_g77hg")
+horizontal_alignment = 2
+vertical_alignment = 1

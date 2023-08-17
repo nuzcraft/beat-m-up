@@ -7,6 +7,7 @@ class_name Actor
 
 @export var health: int
 var dead: bool = false
+var death_animation_playing: bool = false
 
 enum combo_anim {
 	ATTACK_1,
@@ -27,7 +28,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	if dead:
+	if dead and not death_animation_playing:
 		die()
 	
 func set_flip_h(b: bool):
@@ -50,6 +51,7 @@ func _on_animation_player_animation_finished(anim_name):
 		animationPlayer.play("RESET")
 		
 func die():
+	death_animation_playing = true
 	var die_tween = get_tree().create_tween()
 	die_tween.tween_property(characterSprite, "modulate:a", 0, 0.25)
 	die_tween.tween_callback(queue_free)
@@ -64,7 +66,7 @@ func get_attack(target):
 	var anim_name = combo_anim.keys()[current_combo].to_lower()
 	var damage = base_damage + combo_damage[current_combo]
 	attack_anim(target)
-	var shake_amount = 0.15 + (0.075 * current_combo)
+	var shake_amount = min(0.15 + (0.075 * current_combo), 0.5)
 	return {"anim": anim_name, "damage": damage, "shake_amount": shake_amount}
 	
 func attack_anim(target):
@@ -72,7 +74,6 @@ func attack_anim(target):
 	characterSprite.position.x -= (characterSprite.position.x / 2)
 	var tween = get_tree().create_tween()
 	tween.tween_property(characterSprite, "position", Vector2(0, -12), 0.1)
-	
 
 func increase_combo():
 	current_combo += 1

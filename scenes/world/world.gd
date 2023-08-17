@@ -4,9 +4,14 @@ extends Node2D
 @onready var shakeCamera: Camera2D = $ShakeCamera
 
 var effect_scene = preload("res://scenes/effect/effect.tscn")
+var floating_number_scene = preload("res://scenes/floating_number/floating_number.tscn")
+
+var score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.died.connect(_on_enemy_died)
 	pass # Replace with function body.
 
 
@@ -57,11 +62,18 @@ func move_hero_to_attack(target):
 func attack(actor, target):
 	var attack_info = actor.get_attack(target)
 	target.take_damage(attack_info["damage"])
+	var floating_number = floating_number_scene.instantiate()
+	add_child(floating_number)
+	floating_number.set_number(attack_info["damage"])
+	floating_number.global_position = Vector2(target.global_position.x-10, target.global_position.y-24)
 	var effect = effect_scene.instantiate()
 	add_child(effect)
 	effect.global_position = Vector2(target.global_position.x, target.global_position.y-12)
 	effect.flip_h(actor.get_flip_h())
 	effect.play(attack_info["anim"])
 	shakeCamera.add_shake(attack_info["shake_amount"])
-#
+
+func _on_enemy_died(points):
+	score += points
+	print(score)
 		

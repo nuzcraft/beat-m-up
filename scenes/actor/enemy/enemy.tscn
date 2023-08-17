@@ -46,6 +46,7 @@ animations = [{
 
 [node name="Enemy" groups=["enemies"] instance=ExtResource("1_5bhs6")]
 script = ExtResource("2_7prqn")
+points = 100
 health = 4
 
 [node name="CharacterSprite" parent="." index="1"]

@@ -49,11 +49,11 @@ font_size = 10
 
 [node name="Jerry" instance=ExtResource("1_o2jti")]
 script = ExtResource("2_wkapg")
+points = 200
 health = 2
 
-[node name="CharacterSprite" parent="." index="0"]
+[node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_jgesk")
-position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_cyuwv")
 animation = &"attack"
 
