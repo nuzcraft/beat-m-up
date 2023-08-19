@@ -39,7 +39,7 @@ I think I can make something like that:
 11. ~~refactor actor code so that stuff like death is separate from other animations~~
 12. ~~move attack animations off the attacking actor~~
 13. rudimentary background
-14. screenshake
+14. ~~screenshake~~
 15. ~~combo system for hero~~
-16. rudimentary score system
+16. ~~rudimentary score system~~
 17. ~~add jerry slime~~

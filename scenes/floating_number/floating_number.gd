@@ -14,5 +14,5 @@ func _process(delta):
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()
 	
-func set_number(number:int):
+func set_number(number):
 	$LabelHolder/Label.text = str(number)

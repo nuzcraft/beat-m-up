@@ -10,6 +10,7 @@ var score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	update_score_number_label(score)
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.died.connect(_on_enemy_died)
 	pass # Replace with function body.
@@ -75,5 +76,12 @@ func attack(actor, target):
 
 func _on_enemy_died(points):
 	score += points
-	print(score)
+	update_score_number_label(score)
+	var floating_number = floating_number_scene.instantiate()
+	floating_number.set_number("+" + str(points))
+	add_child(floating_number)
+	floating_number.global_position = $HUD/HUDControls/ScoreContainer/ScoreNumberLabel.global_position + Vector2(5, -5)
+	
+func update_score_number_label(number:int):
+	$HUD/HUDControls/ScoreContainer/ScoreNumberLabel.text = str(number)
 		

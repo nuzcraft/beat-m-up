@@ -37,24 +37,40 @@ position = Vector2(367, 206)
 [node name="Jerry" parent="." instance=ExtResource("4_rtd4x")]
 position = Vector2(156, 87)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 576.0
-offset_bottom = 324.0
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="Control"]
+[node name="HUDControls" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreContainer" type="HBoxContainer" parent="HUD/HUDControls"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -26.0
-offset_right = 96.0
+offset_left = 5.0
+offset_top = -40.0
+offset_right = 167.0
 grow_vertical = 0
+
+[node name="ScoreTextLabel" type="Label" parent="HUD/HUDControls/ScoreContainer"]
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "Score: 200
+text = "Score:
 "
 label_settings = SubResource("LabelSettings_g77hg")
-horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ScoreNumberLabel" type="Label" parent="HUD/HUDControls/ScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "200
+"
+label_settings = SubResource("LabelSettings_g77hg")
 vertical_alignment = 1
