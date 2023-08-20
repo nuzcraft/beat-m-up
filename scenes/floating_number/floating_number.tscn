@@ -94,7 +94,8 @@ _data = {
 "float": SubResource("Animation_qc3lc")
 }
 
-[node name="FloatingNumber" type="Node2D"]
+[node name="FloatingNumber" type="Node2D" groups=["floating_number"]]
+z_index = 14
 script = ExtResource("1_hfq7p")
 
 [node name="LabelHolder" type="Node2D" parent="."]

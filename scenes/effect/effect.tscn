@@ -69,6 +69,7 @@ animations = [{
 }]
 
 [node name="Effect" type="Node2D"]
+z_index = 15
 script = ExtResource("1_tfnch")
 
 [node name="EffectSprite" type="AnimatedSprite2D" parent="."]

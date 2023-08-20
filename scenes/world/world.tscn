@@ -4232,4 +4232,5 @@ position = Vector2(421, 172)
 position = Vector2(407, 282)
 
 [node name="Jerry" parent="." instance=ExtResource("4_rtd4x")]
+z_index = 5
 position = Vector2(169, 155)

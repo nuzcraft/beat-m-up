@@ -65,8 +65,12 @@ func attack(actor, target):
 	target.take_damage(attack_info["damage"])
 	var floating_number = floating_number_scene.instantiate()
 	add_child(floating_number)
-	floating_number.set_number(attack_info["damage"])
-	floating_number.global_position = Vector2(target.global_position.x-10, target.global_position.y-24)
+	floating_number.set_number(attack_info["total_combo_damage"])
+	var num_pos: Vector2 = Vector2(target.global_position.x-10, target.global_position.y-24)
+	for num in get_tree().get_nodes_in_group("floating_number"):
+		if num.global_position == num_pos:
+			num.queue_free()
+	floating_number.global_position = num_pos
 	var effect = effect_scene.instantiate()
 	add_child(effect)
 	effect.global_position = Vector2(target.global_position.x, target.global_position.y-12)

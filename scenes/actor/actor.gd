@@ -67,7 +67,7 @@ func get_attack(target):
 	var damage = base_damage + combo_damage[current_combo]
 	attack_anim(target)
 	var shake_amount = min(0.15 + (0.075 * current_combo), 0.5)
-	return {"anim": anim_name, "damage": damage, "shake_amount": shake_amount}
+	return {"anim": anim_name, "damage": damage, "shake_amount": shake_amount, "total_combo_damage": get_combo_damage(current_combo)}
 	
 func attack_anim(target):
 	characterSprite.global_position = Vector2(target.global_position.x, target.global_position.y - 12)
@@ -98,3 +98,10 @@ func check_target(target):
 	if target != current_target:
 		reset_combo()
 		current_target = target
+		
+func get_combo_damage(num_in_combo):
+	var total_combo_damage = 0
+	for dmg in combo_damage.keys().slice(0, num_in_combo+1):
+		total_combo_damage += (base_damage + dmg)
+	return total_combo_damage
+		

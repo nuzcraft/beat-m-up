@@ -200,6 +200,7 @@ _data = {
 }
 
 [node name="Actor" type="Node2D"]
+z_index = 5
 script = ExtResource("1_m1r0q")
 health = 3
 
