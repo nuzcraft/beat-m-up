@@ -64,13 +64,13 @@ func attack(actor, target):
 	var attack_info = actor.get_attack(target)
 	target.take_damage(attack_info["damage"])
 	var floating_number = floating_number_scene.instantiate()
-	add_child(floating_number)
 	floating_number.set_number(attack_info["total_combo_damage"])
-	var num_pos: Vector2 = Vector2(target.global_position.x-10, target.global_position.y-24)
 	for num in get_tree().get_nodes_in_group("floating_number"):
-		if num.global_position == num_pos:
+		if num.target == target:
 			num.queue_free()
-	floating_number.global_position = num_pos
+	floating_number.target = target
+	floating_number.offset = Vector2(-10, -24)
+	add_child(floating_number)
 	var effect = effect_scene.instantiate()
 	add_child(effect)
 	effect.global_position = Vector2(target.global_position.x, target.global_position.y-12)
@@ -83,8 +83,9 @@ func _on_enemy_died(points):
 	update_score_number_label(score)
 	var floating_number = floating_number_scene.instantiate()
 	floating_number.set_number("+" + str(points))
+	floating_number.target = $HUD/HUDControls/ScoreContainer/ScoreNumberLabel
+	floating_number.offset = Vector2(5, -5)
 	add_child(floating_number)
-	floating_number.global_position = $HUD/HUDControls/ScoreContainer/ScoreNumberLabel.global_position + Vector2(5, -5)
 	
 func update_score_number_label(number:int):
 	$HUD/HUDControls/ScoreContainer/ScoreNumberLabel.text = str(number)

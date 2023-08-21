@@ -1,9 +1,15 @@
 extends Node2D
 
+var target
+var offset: Vector2
+var pos: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	if target:
+		global_position = target.global_position + offset
+	elif pos:
+		global_position = pos
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
