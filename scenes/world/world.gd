@@ -13,9 +13,9 @@ func _ready():
 	update_score_number_label(score)
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.died.connect(_on_enemy_died)
+		enemy.attack.connect(_on_enemy_attack)
 	pass # Replace with function body.
-
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if InputBuffer.is_action_press_buffered("ui_left"):
@@ -86,6 +86,10 @@ func _on_enemy_died(points):
 	floating_number.target = $HUD/HUDControls/ScoreContainer/ScoreNumberLabel
 	floating_number.offset = Vector2(5, -5)
 	add_child(floating_number)
+	
+func _on_enemy_attack(actor, target):
+	attack(actor, target)
+	
 	
 func update_score_number_label(number:int):
 	$HUD/HUDControls/ScoreContainer/ScoreNumberLabel.text = str(number)

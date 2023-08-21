@@ -33,13 +33,15 @@ I think I can make something like that:
 5. ~~create interation and main mechanic of hero attacking enemy~~
 6. ~~add health to hero and enemy~~
 7. ~~shadows underneath actors~~
-8. add attack to enemy and let them hurt hero
-9. enemy ai
+8. ~~add attack to enemy and let them hurt hero~~
+9. ~~enemy ai~~
 10. enemy spawner system
 11. ~~refactor actor code so that stuff like death is separate from other animations~~
 12. ~~move attack animations off the attacking actor~~
-13. rudimentary background
+13. ~~rudimentary background~~
 14. ~~screenshake~~
 15. ~~combo system for hero~~
 16. ~~rudimentary score system~~
 17. ~~add jerry slime~~
+18. z index based on y position (also update damage numbers and effects)
+19. hero knockback on hit from enemy (go far pls)

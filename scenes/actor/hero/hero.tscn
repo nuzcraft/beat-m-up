@@ -50,4 +50,3 @@ script = ExtResource("2_ppjak")
 [node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_wnwcl")
 sprite_frames = SubResource("SpriteFrames_dhngl")
-animation = &"attack"

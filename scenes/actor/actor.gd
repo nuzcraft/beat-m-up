@@ -25,6 +25,7 @@ var current_target
 var combo_time: float = 0.5
 
 func _ready():
+	animationPlayer.play("RESET")
 	pass
 
 func _process(delta):
@@ -49,6 +50,8 @@ func take_damage(amount: int):
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "jump":
 		animationPlayer.play("RESET")
+	elif anim_name == "RESET":
+		characterSprite.play("idle")
 		
 func die():
 	death_animation_playing = true
