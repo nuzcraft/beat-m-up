@@ -27,6 +27,11 @@ window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"
 
+[layer_names]
+
+2d_physics/layer_1="hero"
+2d_physics/layer_2="enemy"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

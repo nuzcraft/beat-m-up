@@ -4,6 +4,7 @@ class_name Actor
 @onready var characterSprite: AnimatedSprite2D = $CharacterSprite
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var comboTimer: Timer = $ComboTimer
+@onready var immuneTimer: Timer = $ImmuneTimer
 
 @export var health: int
 var dead: bool = false
@@ -24,6 +25,8 @@ var current_combo = combo_anim.ATTACK_1
 var current_target
 var combo_time: float = 0.5
 
+var immune = false
+
 func _ready():
 	animationPlayer.play("RESET")
 	pass
@@ -31,6 +34,8 @@ func _ready():
 func _process(delta):
 	if dead and not death_animation_playing:
 		die()
+		
+	z_index = global_position.y
 	
 func set_flip_h(b: bool):
 	characterSprite.flip_h = b
@@ -42,13 +47,15 @@ func jump():
 	animationPlayer.play("jump")
 	
 func take_damage(amount: int):
+#	immune = true
 	health -= amount
 	if health <= 0:
 		dead = true
 	animationPlayer.play("take_damage")
+	immuneTimer.start()
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "jump":
+	if anim_name == "jump" or anim_name == "take_damage":
 		animationPlayer.play("RESET")
 	elif anim_name == "RESET":
 		characterSprite.play("idle")
@@ -107,4 +114,12 @@ func get_combo_damage(num_in_combo):
 	for dmg in combo_damage.keys().slice(0, num_in_combo+1):
 		total_combo_damage += (base_damage + dmg)
 	return total_combo_damage
+	
+func knock_back(dir: Vector2, strength: int):
+	var vec = dir * strength
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", global_position + vec, 0.25)
+	tween.set_ease(Tween.EASE_OUT)
 		
+func _on_immune_timer_timeout():
+	immune = false

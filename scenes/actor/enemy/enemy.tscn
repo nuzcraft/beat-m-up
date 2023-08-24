@@ -52,4 +52,3 @@ health = 4
 [node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_l6ynm")
 sprite_frames = SubResource("SpriteFrames_27rg1")
-animation = &"idle"

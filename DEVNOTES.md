@@ -43,5 +43,8 @@ I think I can make something like that:
 15. ~~combo system for hero~~
 16. ~~rudimentary score system~~
 17. ~~add jerry slime~~
-18. z index based on y position (also update damage numbers and effects)
-19. hero knockback on hit from enemy (go far pls)
+18. ~~z index based on y position (also update damage numbers and effects)~~
+19. ~~hero knockback on hit from enemy (go far pls)~~
+20. Jerry
+21. blocking enemy
+22. teleporting enemy

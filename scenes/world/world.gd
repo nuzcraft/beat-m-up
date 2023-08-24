@@ -57,26 +57,33 @@ func move_hero_to_attack(target):
 			hero.jump()
 			move_hero_tween.tween_callback(attack.bind(hero, target))
 		else:
-			attack(hero, target)
-		
+			attack(hero, target)		
 		
 func attack(actor, target):
 	var attack_info = actor.get_attack(target)
-	target.take_damage(attack_info["damage"])
-	var floating_number = floating_number_scene.instantiate()
-	floating_number.set_number(attack_info["total_combo_damage"])
-	for num in get_tree().get_nodes_in_group("floating_number"):
-		if num.target == target:
-			num.queue_free()
-	floating_number.target = target
-	floating_number.offset = Vector2(-10, -24)
-	add_child(floating_number)
-	var effect = effect_scene.instantiate()
-	add_child(effect)
-	effect.global_position = Vector2(target.global_position.x, target.global_position.y-12)
-	effect.flip_h(actor.get_flip_h())
-	effect.play(attack_info["anim"])
-	shakeCamera.add_shake(attack_info["shake_amount"])
+	if not target.immune:
+		target.take_damage(attack_info["damage"])
+		var floating_number = floating_number_scene.instantiate()
+		floating_number.set_number(attack_info["total_combo_damage"])
+		for num in get_tree().get_nodes_in_group("floating_number"):
+			if num.target == target:
+				num.queue_free()
+		floating_number.target = target
+		floating_number.offset = Vector2(-10, -24)
+		floating_number.z_index = target.z_index + 2
+		add_child(floating_number)
+		var effect = effect_scene.instantiate()
+		add_child(effect)
+		effect.global_position = Vector2(target.global_position.x, target.global_position.y-12)
+		effect.z_index = target.z_index + 1
+		effect.flip_h(actor.get_flip_h())
+		effect.play(attack_info["anim"])
+		shakeCamera.add_shake(attack_info["shake_amount"])
+		var dir = actor.global_position.direction_to(target.global_position)
+		if target is Hero:
+			target.knock_back(dir, 50)
+		else:
+			target.knock_back(dir, 10)
 
 func _on_enemy_died(points):
 	score += points
@@ -89,7 +96,6 @@ func _on_enemy_died(points):
 	
 func _on_enemy_attack(actor, target):
 	attack(actor, target)
-	
 	
 func update_score_number_label(number:int):
 	$HUD/HUDControls/ScoreContainer/ScoreNumberLabel.text = str(number)

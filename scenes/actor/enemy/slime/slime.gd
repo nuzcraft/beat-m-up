@@ -14,12 +14,14 @@ func _ready():
 	jumpTimer.stop()
 	jumpTimer.wait_time = randf_range(0, jumpTimer.wait_time)
 	jumpTimer.start()
-	print(jumpTimer.wait_time)
 
 func _process(delta):
 	super(delta)
 	if animationPlayer.is_playing() && animationPlayer.assigned_animation == "slime_jump":
 		global_position = global_position.move_toward(target.global_position, speed)
+		
+	if global_position.distance_to(target.global_position) < 20:
+		attack.emit(self, target)
 
 func _on_jump_timer_timeout():
 	animationPlayer.play("slime_pre_jump")
@@ -35,5 +37,3 @@ func _on_wind_up_timer_timeout():
 	animationPlayer.play("slime_jump")
 	jumpTimer.wait_time = 3.5
 	jumpTimer.start()
-	if global_position.distance_to(target.global_position) < 30:
-		attack.emit(self, target)
