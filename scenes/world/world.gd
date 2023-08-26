@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var hero: Hero = $Hero
 @onready var shakeCamera: Camera2D = $ShakeCamera
+@onready var healthLabel: Label = $HUD/HUDControls/HealthContainer/HealthLabel
 
 var effect_scene = preload("res://scenes/effect/effect.tscn")
 var floating_number_scene = preload("res://scenes/floating_number/floating_number.tscn")
@@ -26,6 +27,7 @@ func _process(delta):
 		hero.set_flip_h(true)
 		var enemy = get_closest_enemy("right")
 		move_hero_to_attack(enemy)
+	healthLabel.text = str(hero.health)
 
 func get_closest_enemy(direction: String):
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -50,14 +52,15 @@ func move_hero_to_attack(target):
 		var difference: Vector2 = target.global_position - hero.global_position
 		var normalized: Vector2 = Vector2(difference.x, 0).normalized()
 		var new_position: Vector2 = Vector2(target.global_position.x + (24 * -normalized.x), target.global_position.y)
-		if hero.global_position.distance_to(target.global_position) > 24:
-			var move_hero_tween = get_tree().create_tween()
-			move_hero_tween.set_ease(Tween.EASE_IN_OUT)
-			move_hero_tween.tween_property(hero, "global_position", new_position, 0.1)
-			hero.jump()
-			move_hero_tween.tween_callback(attack.bind(hero, target))
-		else:
-			attack(hero, target)		
+		if target.global_position.x <= 480 and target.global_position.x >= 96:
+			if hero.global_position.distance_to(target.global_position) > 24:
+				var move_hero_tween = get_tree().create_tween()
+				move_hero_tween.set_ease(Tween.EASE_IN_OUT)
+				move_hero_tween.tween_property(hero, "global_position", new_position, 0.1)
+				hero.jump()
+				move_hero_tween.tween_callback(attack.bind(hero, target))
+			else:
+				attack(hero, target)		
 		
 func attack(actor, target):
 	var attack_info = actor.get_attack(target)
@@ -82,8 +85,8 @@ func attack(actor, target):
 		var dir = actor.global_position.direction_to(target.global_position)
 		if target is Hero:
 			target.knock_back(dir, 50)
-		else:
-			target.knock_back(dir, 10)
+#		else:
+#			target.knock_back(dir, 10)
 
 func _on_enemy_died(points):
 	score += points

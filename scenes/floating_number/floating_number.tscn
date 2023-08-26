@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4kcjdcsf55gn"]
+[gd_scene load_steps=7 format=3 uid="uid://c4kcjdcsf55gn"]
 
 [ext_resource type="Script" path="res://scenes/floating_number/floating_number.gd" id="1_hfq7p"]
+[ext_resource type="Theme" uid="uid://dk3wsf2uf1qpg" path="res://scenes/theme.tres" id="2_58hor"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cg68e"]
 line_spacing = 1.0
@@ -103,6 +104,7 @@ script = ExtResource("1_hfq7p")
 [node name="Label" type="Label" parent="LabelHolder"]
 offset_right = 40.0
 offset_bottom = 24.0
+theme = ExtResource("2_58hor")
 text = "3"
 label_settings = SubResource("LabelSettings_cg68e")
 horizontal_alignment = 1

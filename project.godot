@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="beat m up"
+config/name="stike quickly, small being"
 run/main_scene="res://scenes/world/world.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
