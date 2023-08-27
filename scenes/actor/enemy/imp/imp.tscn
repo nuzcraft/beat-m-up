@@ -43,9 +43,7 @@ animations = [{
 [node name="Imp" instance=ExtResource("1_cckkg")]
 script = ExtResource("2_xouww")
 move_speed = 10
-health = 0
 
 [node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_6bbxk")
 sprite_frames = SubResource("SpriteFrames_ik72k")
-animation = &"attack"
