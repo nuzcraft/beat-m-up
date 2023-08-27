@@ -1,8 +1,11 @@
 extends Actor
 class_name Enemy
 
-@export var points: int = 100
 signal died(pts)
+signal attack(actor, target)
+
+@export var target: Actor
+@export var points: int = 100
 
 func die():
 	super()

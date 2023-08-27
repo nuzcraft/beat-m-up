@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var hero: Hero = $Hero
 @onready var shakeCamera: Camera2D = $ShakeCamera
-@onready var healthLabel: Label = $HUD/HUDControls/HealthContainer/HealthLabel
+@onready var healthLabel: Label = $HUD/HUDControls/ScoreContainer/HealthLabel
 
 var effect_scene = preload("res://scenes/effect/effect.tscn")
 var floating_number_scene = preload("res://scenes/floating_number/floating_number.tscn")
@@ -52,7 +52,7 @@ func move_hero_to_attack(target):
 		var difference: Vector2 = target.global_position - hero.global_position
 		var normalized: Vector2 = Vector2(difference.x, 0).normalized()
 		var new_position: Vector2 = Vector2(target.global_position.x + (24 * -normalized.x), target.global_position.y)
-		if target.global_position.x <= 480 and target.global_position.x >= 96:
+		if target.global_position.x <= 504 and target.global_position.x >= 72:
 			if hero.global_position.distance_to(target.global_position) > 24:
 				var move_hero_tween = get_tree().create_tween()
 				move_hero_tween.set_ease(Tween.EASE_IN_OUT)
@@ -65,9 +65,12 @@ func move_hero_to_attack(target):
 func attack(actor, target):
 	var attack_info = actor.get_attack(target)
 	if not target.immune:
-		target.take_damage(attack_info["damage"])
+		var taken_damage = target.take_damage(attack_info["damage"])
+		var ttl_cmbo_dmg = attack_info["total_combo_damage"]
+		if taken_damage == 0:
+			ttl_cmbo_dmg = 0
 		var floating_number = floating_number_scene.instantiate()
-		floating_number.set_number(attack_info["total_combo_damage"])
+		floating_number.set_number(ttl_cmbo_dmg)
 		for num in get_tree().get_nodes_in_group("floating_number"):
 			if num.target == target:
 				num.queue_free()
@@ -81,7 +84,10 @@ func attack(actor, target):
 		effect.z_index = target.z_index + 1
 		effect.flip_h(actor.get_flip_h())
 		effect.play(attack_info["anim"])
-		shakeCamera.add_shake(attack_info["shake_amount"])
+		var shk_amt = attack_info["shake_amount"]
+		if taken_damage == 0:
+			shk_amt = 0.1
+		shakeCamera.add_shake(shk_amt)
 		var dir = actor.global_position.direction_to(target.global_position)
 		if target is Hero:
 			target.knock_back(dir, 50)

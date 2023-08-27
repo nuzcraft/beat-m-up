@@ -47,10 +47,11 @@ I think I can make something like that:
 19. ~~hero knockback on hit from enemy (go far pls)~~
 20. ~~Jerry~~
 21. ~~show health~~
-22. blocking enemy
+22. ~~blocking enemy~~
 23. teleporting enemy
 24. ~~choose title~~
-25. main screen
+25. ~~main screen~~
 26. game over screen
 27. sound effects
 28. ~~choose new font~~
+29. ways to get health? maybe a healing enemy

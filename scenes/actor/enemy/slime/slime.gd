@@ -1,15 +1,13 @@
 extends Enemy
 class_name Slime
 
-signal attack(actor, target)
-
 @onready var windUpTimer: Timer = $WindUpTimer
 @onready var jumpTimer: Timer = $JumpTimer
 
-@export var target: Actor
-@export var speed: int = 1
+@export var speed: int = 50
 
 func _ready():
+	super()
 	randomize()
 	jumpTimer.stop()
 	jumpTimer.wait_time = randf_range(0, jumpTimer.wait_time)
@@ -18,7 +16,7 @@ func _ready():
 func _process(delta):
 	super(delta)
 	if animationPlayer.is_playing() && animationPlayer.assigned_animation == "slime_jump":
-		global_position = global_position.move_toward(target.global_position, speed)
+		global_position = global_position.move_toward(target.global_position, speed * delta)
 		
 	if global_position.distance_to(target.global_position) < 20:
 		attack.emit(self, target)

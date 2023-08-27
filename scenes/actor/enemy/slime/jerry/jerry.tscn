@@ -64,6 +64,7 @@ shadow_color = Color(0, 0, 0, 1)
 
 [node name="Jerry" instance=ExtResource("1_foeo6")]
 script = ExtResource("2_uid7i")
+speed = 50
 points = 200
 health = 3
 

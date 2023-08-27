@@ -53,6 +53,7 @@ func take_damage(amount: int):
 		dead = true
 	animationPlayer.play("take_damage")
 	immuneTimer.start()
+	return amount
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "jump" or anim_name == "take_damage":

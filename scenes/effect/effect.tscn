@@ -72,7 +72,7 @@ animations = [{
 z_index = 15
 script = ExtResource("1_tfnch")
 
-[node name="EffectSprite" type="AnimatedSprite2D" parent="."]
+[node name="EffectSprite" type="AnimatedSprite2D" parent="." groups=["effect"]]
 sprite_frames = SubResource("SpriteFrames_fa5mm")
 animation = &"attack_3"
 frame = 1
