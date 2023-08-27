@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://dao1sohqi1en8"]
+
+[ext_resource type="PackedScene" uid="uid://dey3vrrqpebvc" path="res://scenes/actor/enemy/enemy.tscn" id="1_cckkg"]
+[ext_resource type="Shader" path="res://scenes/actor/actor.gdshader" id="2_jlvs7"]
+[ext_resource type="Script" path="res://scenes/actor/enemy/imp/imp.gd" id="2_xouww"]
+[ext_resource type="Texture2D" uid="uid://b1smwnklel8na" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="4_4s3pa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bbxk"]
+resource_local_to_scene = true
+shader = ExtResource("2_jlvs7")
+shader_parameter/whitening = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt03x"]
+atlas = ExtResource("4_4s3pa")
+region = Rect2(432, 456, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47x34"]
+atlas = ExtResource("4_4s3pa")
+region = Rect2(432, 480, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ik72k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt03x")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt03x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47x34")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Imp" instance=ExtResource("1_cckkg")]
+script = ExtResource("2_xouww")
+move_speed = 10
+health = 0
+
+[node name="CharacterSprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_6bbxk")
+sprite_frames = SubResource("SpriteFrames_ik72k")
+animation = &"attack"

@@ -1,16 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://cgjdmis0x5c2"]
+[gd_scene load_steps=21 format=3 uid="uid://cgjdmis0x5c2"]
 
 [ext_resource type="PackedScene" uid="uid://c542urqo3hlwn" path="res://scenes/actor/hero/hero.tscn" id="1_4tnvd"]
 [ext_resource type="Script" path="res://scenes/world/world.gd" id="1_bmblk"]
-[ext_resource type="Texture2D" uid="uid://cbegbt4njsigu" path="res://assets/sprites/oryx_16bit_fantasy_world.png" id="2_8apsn"]
+[ext_resource type="Texture2D" uid="uid://biscodx2c23b8" path="res://assets/sprites/oryx_16bit_fantasy_world.png" id="2_8apsn"]
 [ext_resource type="PackedScene" uid="uid://b2qv7j6fcq01e" path="res://scenes/shake_camera/shake_camera.tscn" id="2_h8emb"]
 [ext_resource type="Theme" uid="uid://dk3wsf2uf1qpg" path="res://scenes/theme.tres" id="2_ibruk"]
-[ext_resource type="Texture2D" uid="uid://dm176fimafag7" path="res://assets/sprites/oryx_16bit_fantasy_world_trans.png" id="3_l7og5"]
-[ext_resource type="Texture2D" uid="uid://yisfcrshd4g5" path="res://assets/sprites/oryx_16bit_fantasy_items_85.png" id="3_or6vx"]
-[ext_resource type="Texture2D" uid="uid://bnnekjql5u1aa" path="res://assets/sprites/oryx_16bit_background_trans.png" id="4_rf1xq"]
+[ext_resource type="Texture2D" uid="uid://crjbv1v4bipo3" path="res://assets/sprites/oryx_16bit_fantasy_world_trans.png" id="3_l7og5"]
+[ext_resource type="Texture2D" uid="uid://bfprk0vrwc2ed" path="res://assets/sprites/oryx_16bit_fantasy_items_85.png" id="3_or6vx"]
+[ext_resource type="Texture2D" uid="uid://d3ayms8wenecn" path="res://assets/sprites/oryx_16bit_background_trans.png" id="4_rf1xq"]
 [ext_resource type="PackedScene" uid="uid://bc167ondlqvv3" path="res://scenes/actor/enemy/slime/jerry/jerry.tscn" id="8_g7gia"]
 [ext_resource type="PackedScene" uid="uid://brd0kac4jp2vl" path="res://scenes/actor/enemy/slime/slime.tscn" id="8_jdslj"]
 [ext_resource type="PackedScene" uid="uid://du3c4sggl587r" path="res://scenes/actor/enemy/shield_knight/shield_knight.tscn" id="11_hgbip"]
+[ext_resource type="PackedScene" uid="uid://dao1sohqi1en8" path="res://scenes/actor/enemy/imp/imp.tscn" id="12_g51xe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7y0te"]
 font_size = 20
@@ -4323,11 +4324,7 @@ offset = Vector2(288, 162)
 position = Vector2(252, 215)
 
 [node name="Jerry" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_g7gia")]
-position = Vector2(597, 274)
-target = NodePath("../Hero")
-
-[node name="ShieldKnight" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_hgbip")]
-position = Vector2(59, 271)
+position = Vector2(537, 270)
 target = NodePath("../Hero")
 
 [node name="Slime" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_jdslj")]
@@ -4335,5 +4332,13 @@ position = Vector2(38, 178)
 target = NodePath("../Hero")
 
 [node name="ShieldKnight2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("11_hgbip")]
-position = Vector2(410, 183)
+position = Vector2(553, 173)
+target = NodePath("../Hero")
+
+[node name="Imp" parent="." node_paths=PackedStringArray("target") instance=ExtResource("12_g51xe")]
+position = Vector2(114, 186)
+target = NodePath("../Hero")
+
+[node name="Imp2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("12_g51xe")]
+position = Vector2(478, 203)
 target = NodePath("../Hero")
