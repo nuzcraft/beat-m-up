@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5ib684ihuqie"]
+[gd_scene load_steps=15 format=3 uid="uid://c5ib684ihuqie"]
 
 [ext_resource type="Script" path="res://scenes/effect/effect.gd" id="1_tfnch"]
 [ext_resource type="Texture2D" uid="uid://c2gurfx2rgivb" path="res://assets/sprites/oryx_16bit_fantasy_fx_trans.png" id="1_ubc35"]
@@ -26,6 +26,26 @@ region = Rect2(24, 480, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxskx"]
 atlas = ExtResource("1_ubc35")
 region = Rect2(48, 480, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42htb"]
+atlas = ExtResource("1_ubc35")
+region = Rect2(416, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucst5"]
+atlas = ExtResource("1_ubc35")
+region = Rect2(448, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnje8"]
+atlas = ExtResource("1_ubc35")
+region = Rect2(24, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_leeff"]
+atlas = ExtResource("1_ubc35")
+region = Rect2(48, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi6jx"]
+atlas = ExtResource("1_ubc35")
+region = Rect2(72, 120, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fa5mm"]
 animations = [{
@@ -66,6 +86,31 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42htb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucst5")
+}],
+"loop": false,
+"name": &"teleport",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnje8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_leeff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi6jx")
+}],
+"loop": false,
+"name": &"teleport_2",
+"speed": 10.0
 }]
 
 [node name="Effect" type="Node2D"]
@@ -74,8 +119,6 @@ script = ExtResource("1_tfnch")
 
 [node name="EffectSprite" type="AnimatedSprite2D" parent="." groups=["effect"]]
 sprite_frames = SubResource("SpriteFrames_fa5mm")
-animation = &"attack_3"
-frame = 1
-frame_progress = 1.0
+animation = &"teleport_2"
 
 [connection signal="animation_finished" from="EffectSprite" to="." method="_on_effect_sprite_animation_finished"]
