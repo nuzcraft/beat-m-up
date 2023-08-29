@@ -48,7 +48,7 @@ I think I can make something like that:
 20. ~~Jerry~~
 21. ~~show health~~
 22. ~~blocking enemy~~
-23. teleporting enemy
+23. ~~teleporting enemy~~
 24. ~~choose title~~
 25. ~~main screen~~
 26. game over screen
