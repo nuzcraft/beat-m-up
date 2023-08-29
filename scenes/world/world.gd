@@ -6,6 +6,7 @@ extends Node2D
 
 var effect_scene = preload("res://scenes/effect/effect.tscn")
 var floating_number_scene = preload("res://scenes/floating_number/floating_number.tscn")
+var projectile_scene = preload("res://scenes/projectile/projectile.tscn")
 
 var score: int = 0
 
@@ -15,6 +16,8 @@ func _ready():
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.died.connect(_on_enemy_died)
 		enemy.attack.connect(_on_enemy_attack)
+	for imp in get_tree().get_nodes_in_group("imps"):
+		imp.summon_projectile.connect(_on_summon_projectile)
 	pass # Replace with function body.
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,7 +55,7 @@ func move_hero_to_attack(target):
 		var difference: Vector2 = target.global_position - hero.global_position
 		var normalized: Vector2 = Vector2(difference.x, 0).normalized()
 		var new_position: Vector2 = Vector2(target.global_position.x + (24 * -normalized.x), target.global_position.y)
-		if target.global_position.x <= 504 and target.global_position.x >= 72:
+		if target.global_position.x <= 552 and target.global_position.x >= 24:
 			if hero.global_position.distance_to(target.global_position) > 24:
 				var move_hero_tween = get_tree().create_tween()
 				move_hero_tween.set_ease(Tween.EASE_IN_OUT)
@@ -108,4 +111,13 @@ func _on_enemy_attack(actor, target):
 	
 func update_score_number_label(number:int):
 	$HUD/HUDControls/ScoreContainer/ScoreNumberLabel.text = str(number)
-		
+	
+func _on_summon_projectile(imp: Imp):
+	var projectile = projectile_scene.instantiate()
+	add_child(projectile)
+	projectile.global_position.x = imp.global_position.x
+	projectile.global_position.y = imp.global_position.y-12
+	projectile.set_flip_h(imp.get_flip_h())
+	projectile.parent_actor = imp
+	projectile.target = hero
+	projectile.attack.connect(_on_enemy_attack)

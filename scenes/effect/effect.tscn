@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5ib684ihuqie"]
+[gd_scene load_steps=17 format=3 uid="uid://c5ib684ihuqie"]
 
 [ext_resource type="Script" path="res://scenes/effect/effect.gd" id="1_tfnch"]
 [ext_resource type="Texture2D" uid="uid://c2gurfx2rgivb" path="res://assets/sprites/oryx_16bit_fantasy_fx_trans.png" id="1_ubc35"]
@@ -26,6 +26,14 @@ region = Rect2(24, 480, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxskx"]
 atlas = ExtResource("1_ubc35")
 region = Rect2(48, 480, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8tyn"]
+atlas = ExtResource("1_ubc35")
+region = Rect2(480, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw8h2"]
+atlas = ExtResource("1_ubc35")
+region = Rect2(512, 320, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42htb"]
 atlas = ExtResource("1_ubc35")
@@ -89,6 +97,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_q8tyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hw8h2")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_42htb")
 }, {
 "duration": 1.0,
@@ -119,6 +138,8 @@ script = ExtResource("1_tfnch")
 
 [node name="EffectSprite" type="AnimatedSprite2D" parent="." groups=["effect"]]
 sprite_frames = SubResource("SpriteFrames_fa5mm")
-animation = &"teleport_2"
+animation = &"explosion"
+frame = 1
+frame_progress = 1.0
 
 [connection signal="animation_finished" from="EffectSprite" to="." method="_on_effect_sprite_animation_finished"]

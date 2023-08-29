@@ -1,6 +1,8 @@
 extends Enemy
 class_name Imp
 
+signal summon_projectile(actor)
+
 @export var move_speed: int
 
 @onready var preAttackTimer: Timer = $PreAttackTimer
@@ -84,6 +86,8 @@ func teleport():
 	
 func _on_pre_attack_timer_timeout():
 #	attackTimer.start()
+	summon_projectile.emit(self)
 	animationPlayer.stop()
 	animationPlayer.play("RESET")
 	state = WALKING
+
