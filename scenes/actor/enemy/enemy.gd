@@ -1,7 +1,7 @@
 extends Actor
 class_name Enemy
 
-signal died(pts)
+signal died(pts, enemy)
 signal attack(actor, target)
 
 @export var target: Actor
@@ -10,5 +10,5 @@ signal attack(actor, target)
 func die():
 	super()
 	remove_from_group("enemies")
-	died.emit(points)
+	died.emit(points, self)
 

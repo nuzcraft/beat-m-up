@@ -3,6 +3,7 @@ extends Node2D
 @onready var hero: Hero = $Hero
 @onready var shakeCamera: Camera2D = $ShakeCamera
 @onready var healthLabel: Label = $HUD/HUDControls/ScoreContainer/HealthLabel
+@onready var spawner = $EnemySpawner
 
 var effect_scene = preload("res://scenes/effect/effect.tscn")
 var floating_number_scene = preload("res://scenes/floating_number/floating_number.tscn")
@@ -10,15 +11,18 @@ var projectile_scene = preload("res://scenes/projectile/projectile.tscn")
 
 var score: int = 0
 
+var rng = RandomNumberGenerator.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	update_score_number_label(score)
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.died.connect(_on_enemy_died)
 		enemy.attack.connect(_on_enemy_attack)
 	for imp in get_tree().get_nodes_in_group("imps"):
 		imp.summon_projectile.connect(_on_summon_projectile)
-	pass # Replace with function body.
+	spawner.spawn.connect(_on_spawner_spawn)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -31,7 +35,16 @@ func _process(delta):
 		var enemy = get_closest_enemy("right")
 		move_hero_to_attack(enemy)
 	healthLabel.text = str(hero.health)
-
+	
+	if hero.global_position.x < 0:
+		hero.global_position.x = 0
+	if hero.global_position.x > 576:
+		hero.global_position.x = 576
+	if hero.global_position.y < 144:
+		hero.global_position.y = 144
+	if hero.global_position.y > 288:
+		hero.global_position.y = 288
+		
 func get_closest_enemy(direction: String):
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	if enemies.is_empty():
@@ -97,7 +110,7 @@ func attack(actor, target):
 #		else:
 #			target.knock_back(dir, 10)
 
-func _on_enemy_died(points):
+func _on_enemy_died(points, enemy):
 	score += points
 	update_score_number_label(score)
 	var floating_number = floating_number_scene.instantiate()
@@ -105,6 +118,9 @@ func _on_enemy_died(points):
 	floating_number.target = $HUD/HUDControls/ScoreContainer/ScoreNumberLabel
 	floating_number.offset = Vector2(5, -5)
 	add_child(floating_number)
+	if enemy is Health:
+		hero.health += 1
+	spawner.num_alive -= 1
 	
 func _on_enemy_attack(actor, target):
 	attack(actor, target)
@@ -121,3 +137,20 @@ func _on_summon_projectile(imp: Imp):
 	projectile.parent_actor = imp
 	projectile.target = hero
 	projectile.attack.connect(_on_enemy_attack)
+	
+func _on_spawner_spawn(scene: PackedScene):
+	var enemy = scene.instantiate()
+	enemy.target = hero
+	enemy.died.connect(_on_enemy_died)
+	enemy.attack.connect(_on_enemy_attack)
+	if enemy is Imp:
+		enemy.summon_projectile.connect(_on_summon_projectile)
+	add_child(enemy)
+	enemy.global_position.y = rng.randi_range(144, 288)
+	if randf() >= 0.5:
+		enemy.global_position.x = 600
+	else:
+		enemy.global_position.x = -24
+	if enemy is Health:
+		enemy.set_target(hero)
+	spawner.num_alive += 1

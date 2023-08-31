@@ -77,7 +77,7 @@ func get_attack(target):
 	var anim_name = combo_anim.keys()[current_combo].to_lower()
 	var damage = base_damage + combo_damage[current_combo]
 	attack_anim(target)
-	var shake_amount = min(0.15 + (0.075 * current_combo), 0.5)
+	var shake_amount = min(0.15 + (0.075 * current_combo), 0.35)
 	return {"anim": anim_name, "damage": damage, "shake_amount": shake_amount, "total_combo_damage": get_combo_damage(current_combo)}
 	
 func attack_anim(target):

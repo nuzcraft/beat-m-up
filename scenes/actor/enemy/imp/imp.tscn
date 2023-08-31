@@ -202,7 +202,8 @@ _data = {
 [node name="Imp" groups=["imps"] instance=ExtResource("1_cckkg")]
 script = ExtResource("2_xouww")
 move_speed = 10
-base_damage = 3
+health = 6
+base_damage = 2
 
 [node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_6bbxk")

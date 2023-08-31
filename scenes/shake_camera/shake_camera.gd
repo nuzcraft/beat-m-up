@@ -23,7 +23,7 @@ func _ready():
 	noise_x = randf()
 
 func add_shake(amount):
-	shake_strength = min(shake_strength + amount, 1.0)
+	shake_strength = min(shake_strength + amount, 0.5)
 
 func _process(delta):
 #	if target:
