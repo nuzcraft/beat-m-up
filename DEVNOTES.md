@@ -35,7 +35,7 @@ I think I can make something like that:
 7. ~~shadows underneath actors~~
 8. ~~add attack to enemy and let them hurt hero~~
 9. ~~enemy ai~~
-10. enemy spawner system
+10. ~~enemy spawner system~~
 11. ~~refactor actor code so that stuff like death is separate from other animations~~
 12. ~~move attack animations off the attacking actor~~
 13. ~~rudimentary background~~
