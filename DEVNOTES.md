@@ -54,4 +54,5 @@ I think I can make something like that:
 26. game over screen
 27. sound effects
 28. ~~choose new font~~
-29. ways to get health? maybe a healing enemy
+29. ~~ways to get health? maybe a healing enemy~~
+30. tougher versions of enemies
