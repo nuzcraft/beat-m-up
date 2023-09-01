@@ -56,3 +56,4 @@ I think I can make something like that:
 28. ~~choose new font~~
 29. ~~ways to get health? maybe a healing enemy~~
 30. tougher versions of enemies
+31. ~~commission cover art~~
