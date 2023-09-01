@@ -57,3 +57,4 @@ I think I can make something like that:
 29. ~~ways to get health? maybe a healing enemy~~
 30. tougher versions of enemies
 31. ~~commission cover art~~
+32. add loading effect and spawns monsters closer to the middle of the screen
