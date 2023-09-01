@@ -154,3 +154,4 @@ func _on_spawner_spawn(scene: PackedScene):
 	if enemy is Health:
 		enemy.set_target(hero)
 	spawner.num_alive += 1
+	spawner.num_spawned += 1

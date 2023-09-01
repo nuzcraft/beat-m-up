@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://dui2sgrco7hlr"]
 
-[ext_resource type="Texture2D" uid="uid://gg61tcxp0wm4" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="1_kfo1q"]
+[ext_resource type="Texture2D" uid="uid://b1smwnklel8na" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="1_kfo1q"]
 [ext_resource type="Script" path="res://scenes/actor/actor.gd" id="1_m1r0q"]
 [ext_resource type="Shader" path="res://scenes/actor/actor.gdshader" id="2_pxtsy"]
 
