@@ -51,10 +51,11 @@ I think I can make something like that:
 23. ~~teleporting enemy~~
 24. ~~choose title~~
 25. ~~main screen~~
-26. game over screen
+26. ~~game over screen~~
 27. sound effects
 28. ~~choose new font~~
 29. ~~ways to get health? maybe a healing enemy~~
 30. tougher versions of enemies
 31. ~~commission cover art~~
 32. add loading effect and spawns monsters closer to the middle of the screen
+33. windows and html builds
