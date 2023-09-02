@@ -74,6 +74,8 @@ I think I can make something like that:
 - imp teleport✅
 - imp shoot fireball ✅
 
+Chiptone - https://sfbgames.itch.io/chiptone
+
 music - Juhani Junkala
 
 https://opengameart.org/content/5-chiptunes-action
