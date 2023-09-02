@@ -82,6 +82,7 @@ func _on_pre_attack_timer_timeout():
 	animationPlayer.stop()
 	animationPlayer.play("RESET")
 	state = ATTACK 
+	SoundPlayer.play_sound(SoundPlayer.KNIGHT_HIT)
 
 func _on_attack_timer_timeout():
 	walkingTimer.start()

@@ -83,10 +83,12 @@ func teleport():
 	animationPlayer.play("pre_attack")
 	preAttackTimer.start()
 	state = PRE_ATTACK
+	SoundPlayer.play_sound(SoundPlayer.IMP_TELEPORT)
 	
 func _on_pre_attack_timer_timeout():
 #	attackTimer.start()
 	summon_projectile.emit(self)
+	SoundPlayer.play_sound(SoundPlayer.IMP_FIREBALL)
 	animationPlayer.stop()
 	animationPlayer.play("RESET")
 	state = WALKING

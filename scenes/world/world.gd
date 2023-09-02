@@ -14,6 +14,8 @@ var score: int = 0
 
 var rng = RandomNumberGenerator.new()
 
+var first_input = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
@@ -47,6 +49,12 @@ func _process(delta):
 	if hero.global_position.y > 288:
 		hero.global_position.y = 288
 		
+func _input(event):
+	if first_input == false:
+		if event is InputEventKey or event is InputEventMouseButton or event is InputEventScreenTouch:
+			SoundPlayer.play_music(SoundPlayer.MUSIC)
+			first_input = true
+		
 func get_closest_enemy(direction: String):
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	if enemies.is_empty():
@@ -77,6 +85,7 @@ func move_hero_to_attack(target):
 				move_hero_tween.tween_property(hero, "global_position", new_position, 0.1)
 				hero.jump()
 				move_hero_tween.tween_callback(attack.bind(hero, target))
+				SoundPlayer.play_sound(SoundPlayer.WHOOSH)
 			else:
 				attack(hero, target)		
 		
@@ -109,8 +118,12 @@ func attack(actor, target):
 		var dir = actor.global_position.direction_to(target.global_position)
 		if target is Hero:
 			target.knock_back(dir, 50)
-#		else:
-#			target.knock_back(dir, 10)
+			SoundPlayer.play_sound(SoundPlayer.HERO_HIT)
+		else:
+			if taken_damage == 0:
+				SoundPlayer.play_sound(SoundPlayer.TINK)
+			else:
+				SoundPlayer.play_sound(SoundPlayer.HIT)
 
 func _on_enemy_died(points, enemy):
 	score += points
@@ -122,6 +135,7 @@ func _on_enemy_died(points, enemy):
 	add_child(floating_number)
 	if enemy is Health:
 		hero.health += 1
+		SoundPlayer.play_sound(SoundPlayer.HEALTH)
 	spawner.num_alive -= 1
 	
 func _on_enemy_attack(actor, target):
@@ -160,6 +174,7 @@ func _on_spawner_spawn(scene: PackedScene):
 	
 func _on_hero_died():
 	game_over()	
+	SoundPlayer.play_sound(SoundPlayer.HERO_DIE)
 	
 func game_over():
 	game_over_layer.set_score(score)

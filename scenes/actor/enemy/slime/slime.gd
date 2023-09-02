@@ -29,9 +29,15 @@ func _on_jump_timer_timeout():
 func _on_animation_player_animation_finished(anim_name):
 	super(anim_name)
 	if anim_name == "slime_jump":
+		SoundPlayer.play_sound(SoundPlayer.SLIME_LAND)
 		animationPlayer.play("RESET")
 
 func _on_wind_up_timer_timeout():
 	animationPlayer.play("slime_jump")
 	jumpTimer.wait_time = 3.5
 	jumpTimer.start()
+	SoundPlayer.play_sound(SoundPlayer.SLIME_JUMP)
+	
+func die():
+	super()
+	SoundPlayer.play_sound(SoundPlayer.SLIME_DIE)

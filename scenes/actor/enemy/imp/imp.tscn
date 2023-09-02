@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dey3vrrqpebvc" path="res://scenes/actor/enemy/enemy.tscn" id="1_cckkg"]
 [ext_resource type="Shader" path="res://scenes/actor/actor.gdshader" id="2_jlvs7"]
 [ext_resource type="Script" path="res://scenes/actor/enemy/imp/imp.gd" id="2_xouww"]
-[ext_resource type="Texture2D" uid="uid://b1smwnklel8na" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="4_4s3pa"]
+[ext_resource type="Texture2D" uid="uid://gg61tcxp0wm4" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="4_4s3pa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bbxk"]
 resource_local_to_scene = true

@@ -6,6 +6,7 @@ extends CanvasLayer
 func _on_restart_button_pressed():
 	get_tree().reload_current_scene()
 	get_tree().paused = false
+	SoundPlayer.play_sound(SoundPlayer.CLICK)
 
 func set_score(score:int):
 	score_number_label.text = str(score)
