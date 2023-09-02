@@ -4,6 +4,7 @@ extends Node2D
 @onready var shakeCamera: Camera2D = $ShakeCamera
 @onready var healthLabel: Label = $HUD/HUDControls/ScoreContainer/HealthLabel
 @onready var spawner = $EnemySpawner
+@onready var game_over_layer: CanvasLayer = $GameOver
 
 var effect_scene = preload("res://scenes/effect/effect.tscn")
 var floating_number_scene = preload("res://scenes/floating_number/floating_number.tscn")
@@ -23,6 +24,7 @@ func _ready():
 	for imp in get_tree().get_nodes_in_group("imps"):
 		imp.summon_projectile.connect(_on_summon_projectile)
 	spawner.spawn.connect(_on_spawner_spawn)
+	hero.hero_died.connect(_on_hero_died)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -155,3 +157,13 @@ func _on_spawner_spawn(scene: PackedScene):
 		enemy.set_target(hero)
 	spawner.num_alive += 1
 	spawner.num_spawned += 1
+	
+func _on_hero_died():
+	game_over()	
+	
+func game_over():
+	game_over_layer.set_score(score)
+	game_over_layer.set_defeated(spawner.num_spawned - spawner.num_alive)
+	game_over_layer.show()
+	get_tree().paused = true
+
