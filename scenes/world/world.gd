@@ -164,9 +164,9 @@ func _on_spawner_spawn(scene: PackedScene):
 	add_child(enemy)
 	enemy.global_position.y = rng.randi_range(144, 288)
 	if randf() >= 0.5:
-		enemy.global_position.x = 600
+		enemy.global_position.x = rng.randi_range(432, 600)
 	else:
-		enemy.global_position.x = -24
+		enemy.global_position.x = rng.randi_range(-24, 144)
 	if enemy is Health:
 		enemy.set_target(hero)
 	spawner.num_alive += 1

@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://dui2sgrco7hlr"]
+[gd_scene load_steps=21 format=3 uid="uid://dui2sgrco7hlr"]
 
-[ext_resource type="Texture2D" uid="uid://b1smwnklel8na" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="1_kfo1q"]
+[ext_resource type="Texture2D" uid="uid://gg61tcxp0wm4" path="res://assets/sprites/oryx_16bit_fantasy_creatures_trans.png" id="1_kfo1q"]
 [ext_resource type="Script" path="res://scenes/actor/actor.gd" id="1_m1r0q"]
 [ext_resource type="Shader" path="res://scenes/actor/actor.gdshader" id="2_pxtsy"]
 
@@ -223,6 +223,67 @@ _data = {
 "take_damage": SubResource("Animation_wgs6i")
 }
 
+[sub_resource type="Animation" id="Animation_xxrnf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CharacterSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ShadowSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_611xb"]
+resource_name = "entry"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CharacterSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ShadowSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jjbdk"]
+_data = {
+"RESET": SubResource("Animation_xxrnf"),
+"entry": SubResource("Animation_611xb")
+}
+
 [node name="Actor" type="Node2D"]
 z_index = 5
 script = ExtResource("1_m1r0q")
@@ -252,6 +313,12 @@ one_shot = true
 [node name="ImmuneTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="EntryAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_jjbdk")
+}
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="ComboTimer" to="." method="_on_combo_timer_timeout"]

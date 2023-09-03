@@ -201,10 +201,10 @@ _data = {
 
 [node name="ShieldKnight" instance=ExtResource("1_uep73")]
 script = ExtResource("2_kmqjf")
-move_speed = 7
-points = 300
 health = 7
 base_damage = 2
+points = 300
+move_speed = 7
 
 [node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_sosec")

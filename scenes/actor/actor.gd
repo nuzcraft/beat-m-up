@@ -3,6 +3,7 @@ class_name Actor
 
 @onready var characterSprite: AnimatedSprite2D = $CharacterSprite
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+@onready var entryAnimationPlayer: AnimationPlayer = $EntryAnimationPlayer
 @onready var comboTimer: Timer = $ComboTimer
 @onready var immuneTimer: Timer = $ImmuneTimer
 
@@ -28,8 +29,8 @@ var combo_time: float = 0.5
 var immune = false
 
 func _ready():
+	entryAnimationPlayer.play("entry")
 	animationPlayer.play("RESET")
-	pass
 
 func _process(delta):
 	if dead and not death_animation_playing:

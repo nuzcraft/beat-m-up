@@ -31,10 +31,10 @@ animations = [{
 
 [node name="Health" instance=ExtResource("1_na1lc")]
 script = ExtResource("2_kygnb")
-move_speed = 80
-points = 0
 health = 1
 base_damage = 0
+points = 0
+move_speed = 80
 
 [node name="CharacterSprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_la12n")

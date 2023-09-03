@@ -42,8 +42,8 @@ func _process(delta):
 		pick_new_monster()
 		first_spawn = true
 		
-	if num_spawned == 10:
-		max_num_alive = 12
+	if num_spawned == 18:
+		max_num_alive = 8
 		
 	if num_spawned >= 12 and not jerry_spawn:
 		spawn_new_monster("jerry")
